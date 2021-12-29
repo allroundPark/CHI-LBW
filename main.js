@@ -67,14 +67,21 @@ function generateStudy(productOrder) {
             });
             // console.log(i);
             // console.log(reviewData);
+            let rating_html = "";
+            for (i =0; i<reviewData["rate"];i++) {
+                rating_html += `<img class='star' src="images/star.png"/>`;
+            }
             let el_html = `<div class='review hidden' reviewNum='${i}'>
                 <div class="review-title">${reviewData["review-title"]}</div>
+                <div class="review-rate">
+                    ${rating_html}
+                </div>
                 <div class="review-body">${reviewData["review-body"]}</div>
                 <div class="review-body-translated">${reviewData["review-body-translated"]}</div>
                 <div class="helpfullness-rating">${reviewData["helpfullness-rating"]}</div>
                 <div class='control'>
-                    <button class='btn btn-info' onclick='showReview(${i-1})'>Prev</div>
-                    <button class='btn btn-info' onclick=''>Next(${i+1})</div>
+                    <button class='btn btn-info' onclick='showReview("${pcode}", ${i-1})'>Prev</div>
+                    <button class='btn btn-info' onclick='showReview("${pcode}', ${i-1})'>Next</div>
                 </div>
             </div>`;
             reviewHTML += el_html;
@@ -86,7 +93,7 @@ function generateStudy(productOrder) {
                 <div class="productInstruction">
                     ${imageHTML}
                     <div class='controls'>
-                        <button class='btn btn-info' onclick='showQuestion(1)'>Next</button>
+                        <button class='btn btn-info' onclick='showReview("${pcode}", 1)'>Next</button>
                     </div>
                 </div>
                 ${reviewHTML}
@@ -97,6 +104,16 @@ function generateStudy(productOrder) {
 
 
 
+}
+
+function showReview(productCode, reviewIndex) {
+    // document.querySelectorAll(".product").forEach(el=>{el.classList.add("hidden");});
+    // document.querySelector(".product[pcode='"+productCode+"']").classList.remove("hidden");
+
+    let product_el = document.querySelector(".product[pcode='"+productCode+"']");
+    product_el.querySelector(".productInstruction").classList.add("hidden");
+    product_el.querySelectorAll(".review").forEach(el=>{el.classList.add("hidden")});
+    product_el.querySelector(".review[reviewnum='"+reviewIndex+"']").classList.remove("hidden");
 }
 
 function restoreFromLocalStorage(stringData){
