@@ -44,43 +44,42 @@
                 </p>    
                     실험은 지금부터 녹음하도록 하겠습니다.
                 </p>
+
+                <p>
+                    이메일 주소를 적어주세요. 
+                    <input id="email" type="text"/>
+                </p>
             </div>
-            <button class="btn btn-info" onclick="goPageCode('tutorial')">
-                NEXT
-            </button>
+            <div class="controls">
+                <button class="btn btn-info" onclick="goPageCode('tutorial');">
+                    NEXT
+                </button>
+            </div>
+            
         </div>
 
         <div class="page" pageCode="tutorial">
             <!-- Tutorial Content here -->
-            <button class="btn btn-info" onclick="goPageCode('study')">
-                NEXT
-            </button>
+            <img src='images/tutorial.png'/>
+            <div class='controls'>
+                <button class="btn btn-info" onclick="goPageCode('study')">
+                    NEXT
+                </button>
+            </div>
         </div>
 
         <div class="page" pageCode="study">
-            <!-- Content for the page 1 that shows the main study stuff (including both products) -->
-            <div class="product_instruction">
-                
-            </div>
-            <div class="study_main">
-                <div class="reviewContainer">
-                    <!-- review content will be updated here-->
-                </div>
-            </div>
-            <button class="btn btn-info" onclick="goPageCode('tutorial')">
-                PREV
-            </button>
-            <button class="btn btn-info" onclick="goPageCode('posthoc')">
-                NEXT
-            </button>
         </div>
 
         <div class="page hidden" pageCode="posthoc">
             <!-- Last page (probably post-questionnaire) -->
             PostHoc Interview
-            <button class="btn btn-info" onclick="finalize()">
-                Submit
-            </button>
+            <div class='controls'>
+                <button class="btn btn-info" onclick="finalize()">
+                    Submit
+                </button>
+            </div>
+            
         </div>
 
     </body>

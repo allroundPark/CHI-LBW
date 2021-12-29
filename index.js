@@ -8,7 +8,7 @@ let data = {
             "review-body": "Had I known I’d need to pay a monthly subscription fee I never would have gotten this. I bought in November 2020 and now in May 2021 I’m getting emails that I need to purchase a subscription. Now I can only view the videos live which is fine for the one in my house for checking on my dog but doesn’t work for the one watching my front door incase of break ins or stolen packages. Nest is better, no subscription required.",
             "review-body-translated": "월 구독료를 지불해야 할 줄 알았다면 절대 받지 않았을 것입니다. 2020년 11월에 구매했고 지금 2021년 5월에 구독을 구매해야 한다는 이메일을 받고 있습니다. 이제 나는 비디오를 실시간으로 볼 수만 있습니다. 집에 있는 개를 확인하는 데는 문제가 없지만 침입하거나 소포를 도난당한 경우 현관문을 보는 사람에게는 작동하지 않습니다. Nest가 더 좋으며 구독이 필요하지 않습니다.",
             "helpfulness-rating": null,
-        }        
+        },        
         {
             "product": "tutorial",
             "review-number" : "2",
@@ -40,7 +40,7 @@ let data = {
         },
         {
             "product": "hand cream",
-            "review-number" : "4",
+            "review-number" : "3",
             "rate": "3",
             "review-title": "So much air",
             "review-body": "I love this product and the quality is amazing but the amount of air that is in the tube is just SAD. I can just tell how less is In there. Its quite disappointing",

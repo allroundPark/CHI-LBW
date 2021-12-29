@@ -5,7 +5,14 @@ body {
 .hidden {
   display: none;
 }
-.product_instruction img {
+.page[pageCode='tutorial'] img {
+  width: 90%;
+  margin: 10px auto;
+}
+.page[pageCode='tutorial'] .controls {
+  text-align: center;
+}
+.productInstruction img {
   width: 90%;
   margin: 10px auto;
 }
