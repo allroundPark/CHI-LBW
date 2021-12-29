@@ -13,7 +13,7 @@
         <title>Title</title>
     </head>
     <body>
-        <div class="page" pageNum="0">
+        <div class="page" pageCode="intro">
             <!-- Content for the zero page that shows the overall instruction -->
             <div class="study_title">
                 STUDY CHI LBW
@@ -21,16 +21,25 @@
             <div class="instruction">
                 this study started in England, andnd....  
             </div>
-            <button class="btn btn-info" onclick="goPageNum(1)">
+            <button class="btn btn-info" onclick="goPageCode('tutorial')">
                 NEXT
             </button>
         </div>
 
-        <div class="page hidden" pageNum="1">
+        <div class="page" pageCode="tutorial">
+            <!-- Tutorial Content here -->
+            <button class="btn btn-info" onclick="goPageCode('study')">
+                NEXT
+            </button>
+        </div>
+
+        <div class="page" pageCode="study">
             <!-- Content for the page 1 that shows the main study stuff (including both products) -->
-            Page 1
+            <div class="product_instruction">
+                Product 
+            </div>
             <div class="study_main">
-                <div class="review">
+                <div class="reviewContainer">
                     <!-- review content will be updated here-->
                 </div>
                 <div class="likert">
@@ -40,19 +49,19 @@
                     Next Review
                 </button>
             </div>
-            <button class="btn btn-info" onclick="goPageNum(0)">
+            <button class="btn btn-info" onclick="goPageCode('tutorial')">
                 PREV
             </button>
-            <button class="btn btn-info" onclick="goPageNum(2)">
+            <button class="btn btn-info" onclick="goPageCode('posthoc')">
                 NEXT
             </button>
         </div>
 
-        <div class="page hidden" pageNum="2">
+        <div class="page hidden" pageCode="posthoc">
             <!-- Last page (probably post-questionnaire) -->
-            Page 2
-            <button class="btn btn-info" onclick="goPageNum(1)">
-                PREV
+            PostHoc Interview
+            <button class="btn btn-info" onclick="finalize()">
+                Submit
             </button>
         </div>
 
