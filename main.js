@@ -17,30 +17,49 @@ window.addEventListener("load", ()=>{
 });
 
 
-function startProductSection(productNum) {
-    // productNum is either 1 or 2
+function startProductSection(productCode) {
     let pageEl = document.querySelector(".page[pageCode='study']");
-    let productImageEl = pageEl.querySelector(".productImage");
+    let productInstructionEl = pageEl.querySelector(".product_instruction");
+    if (productCode == "hand cream"){
+        productInstructionEl.innerHTML = `
+            <h3>Product A.</h3>
+            <img src='images/hand cream-1.png'/><br/>
+            <img src='images/hand cream-2.png'/><br/>
+            <button class='btn btn-info'>Next<button>
+        `; 
+    } else {
+        productInstructionEl.innerHTML = `
+            <h3>Product B.</h3>
+            <img src='images/headphone-1.png'/><br/>
+            <img src='images/headphone-2.png'/><br/>
+            <img src='images/headphone-3.png'/><br/>
+            <img src='images/headphone-4.png'/><br/>
+            <img src='images/headphone-5.png'/><br/>
+            <img src='images/headphone-6.png'/><br/>
+            <button class='btn btn-info'>Next<button>
+        `; 
+    }
+    
     // productImageEl.src = productImages[productNum];
 
 
     let reviewContainer = document.querySelector(".reviewContainer");
     // Generating reviews 
-    if (productNum==0) {
-        for (let i=1; i<=20; i++) {
-            let reviewData = data.review.find((item)=>{
-                return item.product=="hand cream" && item["review-number"] == i.toString();
-            });
-            let el_html = `<div class='review'>
-                <div class="review-title">${reviewData["review-title"]}</div>
-                <div class="review-body">${reviewData["review-body"]}</div>
-                <div class="review-body-translated">${reviewData["review-body-translated"]}</div>
-                <div class="helpfullness-rating">${reviewData["helpfullness-rating"]}</div>
-            </div>`;
-            reviewContainer.innerHTML += el_html;
-        }
-    } else {
-
+    for (let i=1; i<=20; i++) {
+        let reviewData = data.review.find((item)=>{
+            return item.product==productCode && item["review-number"] == i.toString();
+        });
+        let el_html = `<div class='review hidden' reviewNum='${i}'>
+            <div class="review-title">${reviewData["review-title"]}</div>
+            <div class="review-body">${reviewData["review-body"]}</div>
+            <div class="review-body-translated">${reviewData["review-body-translated"]}</div>
+            <div class="helpfullness-rating">${reviewData["helpfullness-rating"]}</div>
+            <div class='control'>
+                <button class='btn btn-info' onclick='showReview(${i-1})'>Prev</div>
+                <button class='btn btn-info' onclick=''>Next(${i+1})</div>
+            </div>
+        </div>`;
+        reviewContainer.innerHTML += el_html;
     }
 }
 
