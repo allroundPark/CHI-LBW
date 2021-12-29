@@ -5,6 +5,11 @@ body {
 .hidden {
   display: none;
 }
+img.star {
+  display: inline-block;
+  width: 16px !important;
+  margin: 0 !important;
+}
 .page[pageCode='tutorial'] img {
   width: 90%;
   margin: 10px auto;
