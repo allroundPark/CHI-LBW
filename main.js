@@ -13,9 +13,17 @@ let productImages = {
         "headphone-5.png", "headphone-6.png"
     ]
 };
-function range(start, end) {
-    return Array.from({ length: end - start + 1 }, (_, i) => i)
-}
+const range = (start, end, step = 1) => {
+    let output = [];
+    if (typeof end === 'undefined') {
+        end = start;
+        start = 0;
+    }
+    for (let i = start; i < end; i += step) {
+        output.push(i);
+    }
+    return output;
+};
 function shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -41,16 +49,24 @@ window.addEventListener("load", ()=>{
 function generateStudy(productOrder) {
     // productOrder can be either ["hand cream", "headphone"] or flipped
     let studyEl = document.querySelector(".page[pageCode='study']");
-    productOrder.forEach(pcode=>{
+    productOrder.forEach((pcode,pi)=>{
         let imageHTML = productImages[pcode].map(fn=>{return "<img src='images/"+fn+"'/>";});
         // Generating reviews 
         let reviewHTML = "";
         let randomIndices = shuffle(range(1, 20));
+        console.log(randomIndices);
+        result[pcode] = {
+            "reviewIndices":randomIndices,
+            "answers":{
+
+            }
+        };
         randomIndices.forEach(i=>{
             let reviewData = data.review.find((item)=>{
                 return item.product==pcode && item["review-number"] == i.toString();
             });
-            console.log(reviewData);
+            // console.log(i);
+            // console.log(reviewData);
             let el_html = `<div class='review hidden' reviewNum='${i}'>
                 <div class="review-title">${reviewData["review-title"]}</div>
                 <div class="review-body">${reviewData["review-body"]}</div>
@@ -65,12 +81,16 @@ function generateStudy(productOrder) {
         });
         // END OF generating reviews
         let html = `
-            <h3>Product A.</h3>
-            <div class="productInstruction">
-                ${imageHTML}
-                <button class='btn btn-info' onclick='showQuestion(1)'>Next</button>
+            <div class="product ${(pi==1)?"hidden":""}" pcode="${pcode}">
+                <h3>Product ${(pi==0)?"A":"B"}</h3>
+                <div class="productInstruction">
+                    ${imageHTML}
+                    <div class='controls'>
+                        <button class='btn btn-info' onclick='showQuestion(1)'>Next</button>
+                    </div>
+                </div>
+                ${reviewHTML}
             </div>
-            ${reviewHTML}
         `;
         studyEl.innerHTML += html;
     });
