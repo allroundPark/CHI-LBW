@@ -22,3 +22,10 @@ img.star {
   margin: 10px auto;
   border: 1px solid #aaa;
 }
+.review table {
+  margin: 24px auto;
+}
+.review table td {
+  padding: 0 10px;
+  text-align: center;
+}

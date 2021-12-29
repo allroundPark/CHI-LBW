@@ -53,7 +53,7 @@ function generateStudy(productOrder) {
         let imageHTML = productImages[pcode].map(fn=>{return "<img src='images/"+fn+"'/>";});
         // Generating reviews 
         let reviewHTML = "";
-        let randomIndices = shuffle(range(1, 20));
+        let randomIndices = shuffle(range(1, 21));
         console.log(randomIndices);
         result[pcode] = {
             "reviewIndices":randomIndices,
@@ -61,27 +61,57 @@ function generateStudy(productOrder) {
 
             }
         };
-        randomIndices.forEach(i=>{
+        randomIndices.forEach((reviewNum,ri,ril)=>{
             let reviewData = data.review.find((item)=>{
-                return item.product==pcode && item["review-number"] == i.toString();
+                return item.product==pcode && item["review-number"] == reviewNum.toString();
             });
             // console.log(i);
             // console.log(reviewData);
             let rating_html = "";
-            for (i =0; i<reviewData["rate"];i++) {
+            for (star_idx =0; star_idx<reviewData["rate"];star_idx++) {
                 rating_html += `<img class='star' src="images/star.png"/>`;
             }
-            let el_html = `<div class='review hidden' reviewNum='${i}'>
+            let prevReviewNum;
+            if(ri==0) prevReviewNum = -1;
+            else prevReviewNum = ril[ri-1];
+            let nextReviewNum;
+            if(ri>ril.length-2) {
+                if (pi==0) nextReviewNum = '"Next Product"';
+                else nextReviewNum = '"Next Page"';
+            } else nextReviewNum = ril[ri+1];
+
+            let el_html = `<div class='review hidden' reviewNum='${reviewNum}'>
                 <div class="review-title">${reviewData["review-title"]}</div>
                 <div class="review-rate">
                     ${rating_html}
                 </div>
                 <div class="review-body">${reviewData["review-body"]}</div>
                 <div class="review-body-translated">${reviewData["review-body-translated"]}</div>
-                <div class="helpfullness-rating">${reviewData["helpfullness-rating"]}</div>
+                <div class="likert">
+                    리뷰가 구매 결정에 얼마나 도움이 되었다고 생각하시나요? 
+                    <table>
+                        <tr>
+                            <td>1</td> <td>2</td> <td>3</td> <td>4</td>
+                            <td>5</td> <td>6</td> <td>7</td> <td>8</td>
+                            <td>9</td> 
+                        </tr>
+                        <tr>
+                            <td><input type='radio' name='sample_1' value='1'/></td>
+                            <td><input type='radio' name='sample_1' value='2'/></td>
+                            <td><input type='radio' name='sample_1' value='3'/></td>
+                            <td><input type='radio' name='sample_1' value='4'/></td>
+                            <td><input type='radio' name='sample_1' value='5'/></td>
+                            <td><input type='radio' name='sample_1' value='6'/></td>
+                            <td><input type='radio' name='sample_1' value='7'/></td>
+                            <td><input type='radio' name='sample_1' value='8'/></td>
+                            <td><input type='radio' name='sample_1' value='9'/></td>
+                        </tr>
+                    </table>
+
+                </div>
                 <div class='control'>
-                    <button class='btn btn-info' onclick='showReview("${pcode}", ${i-1})'>Prev</div>
-                    <button class='btn btn-info' onclick='showReview("${pcode}', ${i-1})'>Next</div>
+                    <button class='btn btn-info' onclick='showReview("${pcode}", ${prevReviewNum})'>Prev</button>
+                    <button class='btn btn-info' onclick='showReview("${pcode}", ${nextReviewNum})'>Next</button>
                 </div>
             </div>`;
             reviewHTML += el_html;
@@ -93,7 +123,7 @@ function generateStudy(productOrder) {
                 <div class="productInstruction">
                     ${imageHTML}
                     <div class='controls'>
-                        <button class='btn btn-info' onclick='showReview("${pcode}", 1)'>Next</button>
+                        <button class='btn btn-info' onclick='showReview("${pcode}", ${randomIndices[0]})'>Next</button>
                     </div>
                 </div>
                 ${reviewHTML}
@@ -113,7 +143,17 @@ function showReview(productCode, reviewIndex) {
     let product_el = document.querySelector(".product[pcode='"+productCode+"']");
     product_el.querySelector(".productInstruction").classList.add("hidden");
     product_el.querySelectorAll(".review").forEach(el=>{el.classList.add("hidden")});
-    product_el.querySelector(".review[reviewnum='"+reviewIndex+"']").classList.remove("hidden");
+    try {
+        if (reviewIndex==0) {
+            product_el.querySelector(".productInstruction").classList.remove("hidden");
+        } else {
+            product_el.querySelector(".review[reviewnum='"+reviewIndex+"']").classList.remove("hidden");
+        }
+        
+    } catch(e){
+        console.log(e);
+    }
+    
 }
 
 function restoreFromLocalStorage(stringData){
