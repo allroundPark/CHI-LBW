@@ -2,13 +2,14 @@ body {
   font-size: 16px;
   margin: 20px;
 }
+.container {
+  max-width: 50%;
+}
 .hidden {
   display: none;
 }
-img.star {
-  display: inline-block;
-  width: 16px !important;
-  margin: 0 !important;
+.instruction {
+  line-height: 1.5;
 }
 .page[pageCode='tutorial'] img {
   width: 90%;
@@ -18,9 +19,32 @@ img.star {
   text-align: center;
 }
 .productInstruction img {
-  width: 90%;
+  width: max-content;
   margin: 10px auto;
   border: 1px solid #aaa;
+}
+.review {
+  margin-top: 70px;
+  margin-bottom: 70px;
+}
+.review .review-title {
+  font-size: large;
+  font-weight: bold;
+}
+.review .review-rate .star {
+  width: 2%;
+}
+.review .review-body {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  line-height: 1.5;
+  text-align: justify;
+}
+.review .review-body-translated {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  line-height: 1.5;
+  text-align: justify;
 }
 .review table {
   margin: 24px auto;
